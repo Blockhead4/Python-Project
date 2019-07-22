@@ -53,3 +53,5 @@ for dense_layer in dense_layers:
                         metrics=['accuracy'])
 
             model.fit(X, y, batch_size=32, epochs=10, validation_split=0.1, callbacks=[tensorboard])
+
+

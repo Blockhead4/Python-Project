@@ -49,7 +49,7 @@ def reform_tiles(tiles, row=0, col=0):
 
     reform = []
     for i in tr_tiles:
-        reform.append(list(filter(lambda x:x if x != ' ' else None, i)))
+        reform.append(list(filter(lambda x: x != ' ', i)))
 
     for i in range(len(reform)):
         diff = row - len(reform[i])
@@ -94,7 +94,7 @@ def AnyPangPang():
                 tiles, is_exist_star = find_star(tiles, row, col)
                 
                 if not is_exist_star:
-                    time.sleep(5)
+                    time.sleep(3)
                     print("\n-----< Game Over >-----\n")
                     again = input("The game is over, would you like to play again? (y/n) ")
                     if again.lower() == 'y':

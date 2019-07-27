@@ -94,7 +94,7 @@ def AnyPangPang():
                 tiles, is_exist_star = find_star(tiles, row, col)
                 
                 if not is_exist_star:
-                    time.sleep(3)
+                    time.sleep(2)
                     print("\n-----< Game Over >-----\n")
                     again = input("The game is over, would you like to play again? (y/n) ")
                     if again.lower() == 'y':

@@ -11,8 +11,9 @@ file_list = sorted(os.listdir(base_path))
 # this is most important thing
 glasses = cv2.imread('images/glasses.png', cv2.IMREAD_UNCHANGED)
 
-bbs_model_name = sys.argv[1]
-lmks_model_name = sys.argv[2]
+model_path = r'C:\Users\Jwp\Desktop\workspace\python\Project\Machine_Learning\Cat_Hispsterize\models'
+bbs_model_name = os.path.join(model_path, 'bbs_1.h5')
+lmks_model_name = os.path.join(model_path, 'lmks_1.h5')
 bbs_model = load_model(bbs_model_name)
 lmks_model = load_model(lmks_model_name)
 

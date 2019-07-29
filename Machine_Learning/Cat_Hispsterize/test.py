@@ -9,7 +9,7 @@ base_path = 'samples'
 file_list = sorted(os.listdir(base_path))
 
 # this is most important thing
-glasses = cv2.imread('images/glasses.png', cv2.IMREAD_UNCHANGED)
+glasses = cv2.imread('images/2.png', cv2.IMREAD_UNCHANGED)
 
 model_path = r'C:\Users\Jwp\Desktop\workspace\python\Project\Machine_Learning\Cat_Hispsterize\models'
 bbs_model_name = os.path.join(model_path, 'bbs_1.h5')
@@ -115,18 +115,18 @@ for f in file_list:
     
     angle = -angle_between(ori_lmks[0], ori_lmks[1])
     M = cv2.getRotationMatrix2D((glasses.shape[1] / 2, glasses.shape[0] / 2), angle, 1)
-    rotated_glasses = cv2.warpAffine(glasses, M, (glasses.shape[1],glasses.shape[0]))
+    rotated_glasses = cv2.warpAffine(glasses, M, (glasses.shape[1], glasses.shape[0]))
 
-    try:
-        result_img = overlay_transparent(result_img, rotated_glasses, glasses_center[0], glasses_center[1], overlay_size=(int(glasses_size), int(glasses.shape[0] * glasses_size / glasses.shape[1])))
-    except:
-        print('failed overlay image')
+    # try:
+    result_img = overlay_transparent(result_img, rotated_glasses, glasses_center[0], glasses_center[1], overlay_size=(int(glasses_size), int(glasses.shape[0] * glasses_size / glasses.shape[1])))
+    # except:
+    #     print('failed overlay image')
 
     cv2.imshow('img', ori_img)
     cv2.imshow('result', result_img)
     filename, ext = os.path.splitext(f)
     cv2.imwrite('result/%s_lmks%s' % (filename, ext), ori_img)
-    cv2.imwrite('result/%s_result%s' % (filename, ext), result_img)
+    cv2.imwrite('result/%s_result%s_2' % (filename, ext), result_img)
 
     if cv2.waitKey(0) == ord('q'):
         break

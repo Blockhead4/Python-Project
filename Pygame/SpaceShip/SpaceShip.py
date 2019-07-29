@@ -2,10 +2,13 @@ import gettext
 import math
 import random
 import sys
+import os
 from time import time, sleep
 
 import pygame
 from pygame.locals import *
+
+os.chdir(r'C:\Users\Jwp\Desktop\workspace\python\Project\Pygame\SpaceShip')
 
 WINDOW_WIDTH = 800
 WINDOW_HEIGHT = 600

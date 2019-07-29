@@ -46,7 +46,7 @@ y_test = np.reshape(y_test, (-1, output_size))
 inputs = Input(shape=(img_size, img_size, 3))
 
 mobilenetv2_model = mobilenetv2.MobileNetV2(input_shape=(img_size, img_size, 3), 
-					alpha=1.0, depth_multiplier=1, include_top=False, weights='imagenet', 
+					alpha=1.0, include_top=False, weights='imagenet', 
 					input_tensor=inputs, pooling='max')
 
 net = Dense(128, activation='relu')(mobilenetv2_model.layers[-1].output)

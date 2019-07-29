@@ -8,7 +8,7 @@ import numpy as np
 from PyQt5.QtWidgets import QMessageBox, QApplication, QMainWindow
 from PyQt5 import uic
 
-form_class = uic.loadUiType("main_window.ui")[0]
+form_class = uic.loadUiType(r"C:\Users\Jwp\Desktop\workspace\python\Project\Pygame\tictactoe\made_by_GOD.Jay\main_window.ui")[0]
 
 class MainWindow(QMainWindow, form_class):
     def __init__(self):

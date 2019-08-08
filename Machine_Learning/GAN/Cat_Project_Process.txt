@@ -1,0 +1,9 @@
+고양이 사진 >> 얼굴 바운딩 박스 학습(힙스터)
+
+얼굴 이미지 >> 렌드마크 추출 학습(힙스터)
+
+랜드마크 >> 이미지 메이킹 학습(Munit)
+
+만들어진 일러스트 머리 + 몸통 >> 트랜슬레이션(사이클갠 or 디스코갠?? No.. Just paste it on the body ilustration by using coord(x, y))
+
+and That's it?

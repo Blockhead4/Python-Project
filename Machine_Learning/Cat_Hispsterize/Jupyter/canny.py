@@ -28,30 +28,33 @@ args = vars(ap.parse_args())
 i = 0
 for imagePath in glob.glob(args["lmks_imgs"] + "/*.jpg"):
 
+    if i == 2:
+        # load the image, convert it to grayscale, and blur it slightly
+        image = cv2.imread(imagePath)
+        gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+        blurred = cv2.GaussianBlur(gray, (5, 5), 0)
 
-    # load the image, convert it to grayscale, and blur it slightly
-    image = cv2.imread(imagePath)
-    gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
-    blurred = cv2.GaussianBlur(gray, (3, 3), 0)
+        kernel = np.ones((5,5), np.float32)/25
+        blur = cv2.filter2D(image, -1, kernel)
 
-    kernel = np.ones((5,5), np.float32)/25
-    blur = cv2.filter2D(image, -1, kernel)
+        # apply Canny edge detection using a wide threshold, tight
+        # threshold, and automatically determined threshold
+        wide = cv2.Canny(blur, 20, 255)
+        # tight = cv2.Canny(blur, 225, 250)
+        # auto = auto_canny(blur, 0)
 
-    # apply Canny edge detection using a wide threshold, tight
-    # threshold, and automatically determined threshold
-    wide = cv2.Canny(blur, 20, 255)
-    # tight = cv2.Canny(blur, 225, 250)
-    # auto = auto_canny(blur, 0)
+        # show the images
+        # cv2.imshow("Original", image)
+        # cv2.imshow("Edges", np.hstack([wide, tight, auto]))
+        # cv2.imshow("wide, tight", np.hstack([wide, tight]))
+        cv2.imshow("wide", wide)
+        # cv2.imshow("tight", tight)
+        # cv2.imshow("Edges", auto)
 
-    # show the images
-    # cv2.imshow("Original", image)
-    # cv2.imshow("Edges", np.hstack([wide, tight, auto]))
-    # cv2.imshow("wide, tight", np.hstack([wide, tight]))
-    # cv2.imshow("wide", wide)
-    # cv2.imshow("tight", tight)
-    # cv2.imshow("Edges", auto)
-    cv2.imwrite('canny_imgs/00{}_wide.jpg'.format(i), wide)
-    cv2.waitKey(0)
+        # cv2.imwrite('canny_imgs/00{}_wide.jpg'.format(i), wide)
+        cv2.waitKey(0)
+        
+        break
     
     i += 1
 

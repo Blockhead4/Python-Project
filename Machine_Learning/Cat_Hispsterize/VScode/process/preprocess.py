@@ -14,9 +14,9 @@ for i in range(7):
     random.shuffle(file_lists)
 
     dataset = {
-    'imgs': [],
-    'lmks': [],
-    'bbs': []
+        'imgs': [],
+        'lmks': [],
+        'bbs': []
     }
 
     def resize_img(im):

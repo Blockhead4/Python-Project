@@ -1,27 +1,21 @@
 import cv2
-import numpy as np
 
-img = cv2.imread(r'images\chessboard\frame01.jpg')
-img_original = img.copy()
-gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
-edges = cv2.Canny(gray,50,150,apertureSize=3)
+img_color = cv2.imread('box.png', cv2.IMREAD_COLOR)
+img_gray = cv2.cvtColor(img_color, cv2.COLOR_BGR2GRAY)
 
-lines = cv2.HoughLines(edges,1,np.pi/180,100)
+img_sobel_x = cv2.Sobel(img_gray, cv2.CV_64F, 1, 0, ksize=3)
+img_sobel_x = cv2.convertScaleAbs(img_sobel_x)
 
-for i in xrange(len(lines)):
-    for rho, theta in lines[i]:
-        a = np.cos(theta)
-        b = np.sin(theta)
-        x0 = a*rho
-        y0 = b*rho
-        x1 = int(x0 + 1000*(-b))
-        y1 = int(y0+1000*(a))
-        x2 = int(x0 - 1000*(-b))
-        y2 = int(y0 -1000*(a))
+img_sobel_y = cv2.Sobel(img_gray, cv2.CV_64F, 0, 1, ksize=3)
+img_sobel_y = cv2.convertScaleAbs(img_sobel_y)
 
-        cv2.line(img,(x1,y1),(x2,y2),(0,0,255),2)
 
-res = np.vstack((img_original,img))
-cv2.imshow('img',res)
+img_sobel = cv2.addWeighted(img_sobel_x, 1, img_sobel_y, 1, 0);
+
+
+cv2.imshow("Sobel X", img_sobel_x)
+cv2.imshow("Sobel Y", img_sobel_y)
+cv2.imshow("Sobel", img_sobel)
+
 cv2.waitKey(0)
 cv2.destroyAllWindows()

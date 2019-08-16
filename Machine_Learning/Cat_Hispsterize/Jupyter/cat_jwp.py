@@ -56,7 +56,7 @@ class Cat_landmarks(object):
             
         """
         for f in self.file_list:
-            if '.jpg' not in f:
+            if ('jpg' not in f) and ('jpeg' not in f) and ('png' not in f):
                 continue
 
             img = cv2.imread(os.path.join(self.base_path, f))
@@ -150,11 +150,13 @@ class Cat_landmarks(object):
                 ]).astype(np.int)
                 bbl = np.clip(bbl, 0, 99999)
 
-            # cv2.rectangle(ori_img, pt1=tuple(bbl[0]), pt2=tuple(bbl[1]), color=(0, 0, 0), thickness=2)
+            # cv2.rectangle(ori_img, pt1=tuple(bbl[0]), pt2=tuple(bbl[1]), color=(255, 255, 255), thickness=2)
 
             lmks_img = ori_img[bbl[0][1]:bbl[1][1], bbl[0][0]:bbl[1][0]]
             filename, ext = os.path.splitext(f)
 
+            # cv2.imwrite('lmks_imgs/{}_bbs{}'.format(filename, ext), ori_img)
+            
             path = os.path.join('lmks_imgs', position)
             if not os.path.exists(path):
                 os.makedirs(path)
@@ -165,33 +167,33 @@ class Cat_landmarks(object):
                 cv2.imwrite('lmks_imgs/{0}/{1}_{0}{2}'.format(position, filename, ext), lmks_img)
     
 
-        try:
+        # try:
 
-            if position == 'all':
+        if position == 'all':
 
-                for i in range(5):
+            for i in range(5):
 
-                    find_landmarks()
-            
-            else:
-                
-                if position == 'left_eye':
-                    i = 0
-
-                elif position == 'right_eye':
-                    i = 1
-
-                elif position == 'nose':
-                    i = 2
-
-                elif position == 'left_ear':
-                    i = 3
-
-                elif position == 'right_ear':
-                    i = 4
-                
                 find_landmarks()
+        
+        else:
+            
+            if position == 'left_eye':
+                i = 0
 
-        except:
+            elif position == 'right_eye':
+                i = 1
 
-            raise ValueError("position is not correct, you must select position in ( 'all', 'left_eye', 'right_eye', 'left_ear', 'right_ear' ).")
+            elif position == 'nose':
+                i = 2
+
+            elif position == 'left_ear':
+                i = 3
+
+            elif position == 'right_ear':
+                i = 4
+            
+            find_landmarks()
+
+        # except:
+
+            # raise ValueError("position is not correct, you must select position in ( 'all', 'left_eye', 'right_eye', 'left_ear', 'right_ear' ).")
